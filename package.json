@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "This is my First working WordPress Theme",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "gulpfile",
     "scss",
@@ -16,23 +13,50 @@
   "author": "Ryan Mendoza",
   "license": "GPL-3.0",
   "devDependencies": {
+    "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
+    "@wordpress/browserslist-config": "^2.5.0",
+    "@wordpress/scripts": "3.3.0",
+    "babel-loader": "^8.0.6",
+    "babel-preset-latest": "^6.24.1",
     "babelify": "^10.0.0",
-    "browser-sync": "^2.26.5",
+    "browser-sync": "^2.26.7",
     "browserify": "^16.2.3",
+    "browserslist": "^4.6.3",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^6.1.0",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
+    "lodash": "^4.17.11",
     "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^2.0.0"
+    "vinyl-source-stream": "^2.0.0",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5"
+  },
+  "browserslist": [
+    "extends @wordpress/browserslist-config"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "wp-scripts build",
+    "check-engines": "wp-scripts check-engines",
+    "check-licenses": "wp-scripts check-licenses",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "lint:pkg-json": "wp-scripts lint-pkg-json",
+    "start": "wp-scripts start",
+    "test:e2e": "wp-scripts test-e2e",
+    "test:unit": "wp-scripts test-unit-js"
   },
   "babel": {
     "presets": [
       "@babel/preset-env"
     ]
+  },
+  "dependencies": {
+    "gatsby": "^2.13.3"
   }
 }

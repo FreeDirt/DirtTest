@@ -1,14 +1,128 @@
 body {
 	font-family: arial, sans-serif;
 	font-size: 14px;
-	color: #FFfffF;
-	background: $bg;
+	background: $white;
 }
 
-a {
-	transition: all 320ms ease;
+a:link,
+a:visited {
+	color: #006ec3;
 }
 
-h1 {
+p {
+	line-height: 1.65em;
+}
+
+h1, h5 {
 	transition: all 320ms ease;
+	color: #000;
+}
+
+
+/* General Layout */
+div.container {
+	max-width: 1280px;
+	margin:0 auto;
+}
+
+article.post {
+	border-bottom: 2px dotted #bbbbbb;
+}
+
+article.post:last-of-type {
+	border-bottom: none;
+}
+
+/* Page Layout */
+article.page h2 {
+	font-size: 300%;
+}
+
+/* Clearfix */
+.clearfix:before, .clearfix:after {content:"";display: table;}
+.clearfix:after {clear:both;}
+.clearfix {*zoom:1;}
+
+
+div.title-column {
+	width: 30%;
+	float: left;
+}
+
+div.text-column {
+	width: 70%;
+	float: right;
+}
+
+/* info box style */
+div.info-box {
+	width: 30%;
+	float:right;
+	margin: 0 0 30px 30px;
+	padding: 20px;
+	background-color: #EEE;
+
+	h4 {
+		margin-bottom: 6px;
+	}
+
+	p {
+		font-size: 85%;
+	}
+}
+
+
+/* Childrens Links */
+.children-links {
+	margin-bottom: 20px;
+	font-size: 80%;
+
+	a:link, a:visited {
+		text-decoration: none;
+	}
+	
+	ul {
+		float: left;
+	}
+
+	li {
+		margin-right: 20px;
+	}
+}
+
+.children-links .parent-link {
+	float: left;
+	margin-right: 20px;
+	padding-right: 20px;
+	border-right: 1px solid #DDD;
+	font-size: 120%;
+	font-weight: bold;
+}
+
+.children-links .parent-link a:link,
+.children-links .parent-link a:visited {
+	color: #333333;
+}
+
+.children-links .current_page_item a:link,
+.children-links .current_page_item a:visited {
+	border-bottom: 1px solid #000;
+	color: #333;
+	cursor: default;
+}
+
+/* POST Styles */
+.post h2 {
+	margin-bottom: 0;
+}
+
+p.post-info {
+	font-size: 87%;
+	color: #999;
+	margin: 0px;
+}
+
+p.post-info a:link,
+p.post-info a:visited {
+	margin-bottom: 0;
 }

@@ -48,7 +48,7 @@ function css(done) {
 		}) )
 		.on( 'error', console.error.bind( console ) )
 		.pipe( autoprefixer({
-			browsers: ['last 2 versions'],
+			overrideBrowserslist: ['last 2 versions'],
 			cascade: false
 		}))
 		.pipe( rename({ suffix: '.min' }))
