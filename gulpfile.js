@@ -10,6 +10,7 @@ var browserify = require( 'browserify' );
 var babelify = require( 'babelify' );
 var source = require( 'vinyl-source-stream' );
 var buffer = require( 'vinyl-buffer' );
+var connectPHP = require('gulp-connect-php');
 var browserSync  = require( 'browser-sync' ).create();
 var reload = browserSync.reload;
 
@@ -24,6 +25,7 @@ var jsDIST = './assets/js/';
 var jsWatch = 'src/js/**/*.js';
 var jsFILES = [jsSRC];
 
+var phpWatch = '**/*.php';
 
 function browser_sync(done) {
 	browserSync.init({
@@ -38,6 +40,7 @@ function browser_sync(done) {
 
 	done();
 };
+
 
 function css(done) {
 	src( styleSRC )
@@ -81,7 +84,8 @@ function js(done) {
 
 function watch_files() {
 	 watch(styleWatch, css);
-	 watch(jsWatch, series(js,reload))
+	 watch(jsWatch, series(js,reload));
+	 watch(phpWatch).on('change', reload);
 };
 
 task("css", css);

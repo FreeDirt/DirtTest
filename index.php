@@ -1,37 +1,38 @@
-<?php
+<?php get_header(); ?>
 
-get_header();
+	<!-- Site Content -->
+	<div class="site-content clearfix">
+		<!-- main-column  -->
+		<div class="main-column">
+			<?php 
 
-if ( have_posts() ) :
-    while ( have_posts() ) : the_post(); ?>
-    <article class="post">
-    <h2><a href=" <php the_permalinks(); ?>"><?php the_title(); ?></a></h2>
+				if ( have_posts() ) :
 
-     <p class="post-info"><?php the_time(' F jS, Y g:i a'); ?>
-      | by <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>"><?php the_author(); ?></a>
-      | Posted in <?php
-            $categories = get_the_category();
-            $separator = ", ";
-            $output = '';
+			    while ( have_posts() ) : the_post();
 
-            if ($categories) {
-                foreach ($categories as $category) {
-                    $output .= '<a href="' . get_category_link($category->term_id) . '">' . $category->cat_name . '</a>' . $separator;
-                }
+			        get_template_part('template/content', get_post_format());
 
-                echo trim($output, $separator);
-            }
-       ?>
-    </p>
-        <?php the_content(); ?>
-    </article>
-    <?php endwhile;
-else :
-    _e( 'Sorry, no posts were found.', 'textdomain' );
+			    endwhile;
 
-endif;
+			    	echo paginate_links();
+
+			    else :
+
+			        _e( 'Sorry, no posts were found.', 'textdomain' );
+
+			    endif;
+			 ?>
+			
+		</div>
+		<!-- /main-column  -->
+
+		<?php get_sidebar(); ?>
+
+		
+	</div>
+	<!-- Site Content -->
+	
+	
 
 
-get_footer();
-
-?>
+<?php get_footer(); ?>
