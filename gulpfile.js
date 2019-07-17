@@ -12,7 +12,7 @@ var source = require( 'vinyl-source-stream' );
 var buffer = require( 'vinyl-buffer' );
 var connectPHP = require('gulp-connect-php');
 var browserSync  = require( 'browser-sync' ).create();
-var reload = browserSync.reload;
+// var reload = browserSync.reload;
 
 
 var styleSRC = 'src/scss/mystyle.scss';
@@ -27,7 +27,7 @@ var jsFILES = [jsSRC];
 
 var phpWatch = '**/*.php';
 
-function browser_sync(done) {
+function browser_sync() {
 	browserSync.init({
 
 		// server: {
@@ -37,10 +37,14 @@ function browser_sync(done) {
 		injectChanges: true,
 		proxy: 'http://localhost/floodcontrolasia/'
 	});
+};
+
+
+function reload(done) {
+	browserSync.reload();
 
 	done();
 };
-
 
 function css(done) {
 	src( styleSRC )
@@ -83,15 +87,15 @@ function js(done) {
 };
 
 function watch_files() {
-	 watch(styleWatch, css);
-	 watch(jsWatch, series(js,reload));
-	 watch(phpWatch).on('change', reload);
+	 watch(styleWatch, series(css, reload));
+	 watch(jsWatch, series(js, reload));
+	 watch(phpWatch).on('change', function () { browserSync.reload(); });
 };
 
 task("css", css);
 task("js", js);
 task("default", parallel(css, js));
-task("watch", parallel(watch_files, browser_sync));
+task("watch", parallel(browser_sync, watch_files));
 
 // gulp.task('default',gulp.series(['style', 'js']));﻿
 
