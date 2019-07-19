@@ -10,32 +10,28 @@
 	
 	<div class="container">
 
-		<!-- hd-search -->
-		<div class="hd-search">
-			<?php get_search_form(); ?>
-		</div>
-		<!-- /hd-search -->
-
 		<header class="site-header">
-			<h1><a href=" <?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
-			<h5><?php bloginfo('description');?> <?php if (is_page('portfolio')) { ?>
-					- Thank you for Visiting my Website!!
-			<?php } ?></h5>
 
+			<div class="header-desc-w-smedia flex-container">
+				<div class="header-desc-container flex-1">
+					<p>description Here</p>
+				</div>
+				<div class="header-smedia-container flex-1">
+					<p>Social Add Here</p>
+				</div>
+			</div>
 			<?php
 			$custom_logo_id = get_theme_mod( 'custom_logo' );
 			$custom_logo_url = wp_get_attachment_image_url( $custom_logo_id , 'full' ); ?>
-			<a href="<?php echo esc_url(home_url( '/'));  ?>"><?php echo '<img src="' . esc_url( $custom_logo_url ) . '" alt="flood control asia logo"> '?></a>       
-			<?php ?>
-
+			 
+			
+			<?php if (get_theme_mod('custom_logo') != '') { ?>
+				<a href="<?php echo esc_url(home_url( '/'));  ?>"><?php echo '<img src="' . esc_url( $custom_logo_url ) . '" alt="flood control asia logo" width="301" height="80"> '?></a>   
+			<?php } else { ?>
+				<h1><a href="<?php echo home_url('/'); ?>"><?php bloginfo('name'); ?></a></h1>
+						  <p><?php bloginfo('description'); ?></p>
+			<?php } ?>
 			
 
-			<nav class="site-nav">
-				<?php $args = array(
-					'theme_location' => 'primary'
-				);
-				?>
-
-				<?php wp_nav_menu( $args ); ?>
-			</nav>
+			
 		</header>

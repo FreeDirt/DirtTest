@@ -27,7 +27,7 @@ var jsFILES = [jsSRC];
 
 var phpWatch = '**/*.php';
 
-function browser_sync() {
+function browser_sync(done) {
 	browserSync.init({
 
 		// server: {
@@ -35,18 +35,23 @@ function browser_sync() {
 		// }
 		open: false,
 		injectChanges: true,
-		proxy: 'http://localhost/floodcontrolasia/'
+		proxy: 'http://localhost/floodcontrolasia/',
+			socket: {
+	      domain: 'localhost:3000'
+	    }
 	});
-};
-
-
-function reload(done) {
-	browserSync.reload();
 
 	done();
 };
 
+function reload(done) {
+	browserSync.reload();
+	done();
+}
+
+
 function css(done) {
+	return (
 	src( styleSRC )
 	.pipe( sourcemaps.init() )
 		.pipe( sass({
@@ -61,7 +66,8 @@ function css(done) {
 		.pipe( rename({ suffix: '.min' }))
 		.pipe( sourcemaps.write( './' ) )
 		 .pipe( dest( styleDIST ) )
-		 .pipe( browserSync.stream() );
+		 .pipe( browserSync.stream() )
+		);
  
  	done();
 };
@@ -87,9 +93,9 @@ function js(done) {
 };
 
 function watch_files() {
-	 watch(styleWatch, series(css, reload));
+	 watch(styleWatch, css);
 	 watch(jsWatch, series(js, reload));
-	 watch(phpWatch).on('change', function () { browserSync.reload(); });
+	 watch(phpWatch).on('change', reload);
 };
 
 task("css", css);
